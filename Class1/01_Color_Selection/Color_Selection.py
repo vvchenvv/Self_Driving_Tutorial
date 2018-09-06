@@ -12,6 +12,12 @@ print('This image is: ',type(image_P),
 
 image=array(image_P)
 
+print(len(image))
+print(len(image[0]))
+print(len(image[0][0]))
+print("-------len--------")
+print(image[0])
+
 # Grab the x and y size and make a copy of the image
 ysize = image.shape[0]
 xsize = image.shape[1]
@@ -33,7 +39,10 @@ thresholds = (image[:,:,0] < rgb_threshold[0]) \
             | (image[:,:,1] < rgb_threshold[1]) \
             | (image[:,:,2] < rgb_threshold[2])
 
-print(thresholds)
+print(len(thresholds))
+print(len(thresholds[0]))
+
+
 color_select[thresholds] = [0,0,0]
 
 # Display the image                 
