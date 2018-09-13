@@ -49,7 +49,7 @@ region_thresholds = (YY > (XX*fit_left[0] + fit_left[1])) & \
 
 region_color_select[thresholds]=[0,0,0]
 region_color_select[~region_thresholds] = [0, 0, 0]
-region_color_select[~thresholds & region_thresholds]=[255,0,0]
+# region_color_select[~thresholds & region_thresholds]=[255,0,0]
 # region_color_select[~thresholds&region_color_select]=[255,0,0]
 # print(region_thresholds)
 
