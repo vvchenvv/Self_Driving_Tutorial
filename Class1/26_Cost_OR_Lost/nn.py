@@ -16,7 +16,7 @@ a_ = np.array([4.5, 5, 10])
 
 feed_dict = {y: y_, a: a_}
 graph = topological_sort(feed_dict)
-# forward pass
+# forward pass function
 forward_pass(graph)
 
 """
