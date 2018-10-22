@@ -22,6 +22,6 @@ forward_pass(graph)
 """
 Expected output
 
-23.4166667
+23.4166666667
 """
 print(cost.value)
