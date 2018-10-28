@@ -3,7 +3,7 @@
 # 均方误差MSE
 MSE：mean squared error 
 
-![image](http://note.youdao.com/favicon.ico)
+![image](https://raw.githubusercontent.com/vvchenvv/Self_Driving_Tutorial/master/Class1/26_Cost_OR_Lost/01%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AE%E5%85%AC%E5%BC%8F.png)
 
 - w：神经网络中所有权重的集合
 - b：所有偏置的集合
@@ -49,7 +49,7 @@ class MSE(Node):
 这里面使用reshape（）是防止矩阵在传播过程中因矩阵不一致问题导致的计算错误。
 
 更多代码请关注
-[我的Github](http://note.youdao.com/)
+[我的Github](https://github.com/vvchenvv/Self_Driving_Tutorial/tree/master/Class1/26_Cost_OR_Lost)
 
 [我的网站](http://weiweizhao.com/category/ai/)
 
