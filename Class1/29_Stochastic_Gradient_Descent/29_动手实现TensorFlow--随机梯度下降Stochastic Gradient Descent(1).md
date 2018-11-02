@@ -65,7 +65,7 @@ for i in range(epochs):
 [sklearn.utils.resample](http://scikit-learn.org/stable/modules/generated/sklearn.utils.resample.html)
 测试结果：
 
-![image](http://note.youdao.com/favicon.ico)
+![image](https://raw.githubusercontent.com/vvchenvv/Self_Driving_Tutorial/master/Class1/29_Stochastic_Gradient_Descent/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.PNG)
 
 
 完整代码请关注我的github：
