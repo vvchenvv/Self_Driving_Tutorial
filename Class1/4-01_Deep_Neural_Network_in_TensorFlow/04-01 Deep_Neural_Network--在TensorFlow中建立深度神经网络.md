@@ -1,13 +1,19 @@
+之前我们已经通过TensorFlow建立了自己的分类器，现在我们将从基本的分类器转变为深度神经网络。我们以识别MNIST数据集中的手写数字作为目标，通过代码一步步建立神经网络。
+
+![image](https://raw.githubusercontent.com/vvchenvv/Self_Driving_Tutorial/master/Class1/4-01_Deep_Neural_Network_in_TensorFlow/%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.jpg)
+
+# 代码
+
+```
 from tensorflow.examples.tutorials.mnist import input_data
-# mnist = input_data.read_data_sets(".", one_hot=True, reshape=False)
-mnist = input_data.read_data_sets('K:\datasets\MNIST', one_hot=True, reshape=False)
+mnist = input_data.read_data_sets(".", one_hot=True, reshape=False)
 #MNIST数据集已经可以用one-hot编码的形式提供
 
 import tensorflow as tf
 
 # 学习的参数大家可以自行调节
 learning_rate = 0.001
-training_epochs = 200
+training_epochs = 20
 batch_size = 128  # Decrease batch size if you don't have enough memory
 display_step = 1
 
@@ -38,7 +44,6 @@ x_flat = tf.reshape(x, [-1, n_input])
 # Hidden layer with RELU activation
 layer_1 = tf.add(tf.matmul(x_flat, weights['hidden_layer']), biases['hidden_layer'])
 layer_1 = tf.nn.relu(layer_1)
-# layer_1 = tf.nn.sigmoid(layer_1)
 # Output layer with linear activation
 logits = tf.matmul(layer_1, weights['out']) + biases['out']
 
@@ -49,9 +54,6 @@ optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minim
 
 # Initializing the variables
 init = tf.global_variables_initializer()
-
-loss_plot=[]
-x_axis=[]
 
 # Launch the graph
 with tf.Session() as sess:
@@ -70,8 +72,6 @@ with tf.Session() as sess:
             c = sess.run(cost, feed_dict={x: batch_x, y: batch_y})
             print("Epoch:", '%04d' % (epoch+1), "cost=", \
                 "{:.9f}".format(c))
-            loss_plot.append(c)
-            x_axis.append(epoch)
     print("Optimization Finished!")
 
     # Test model
@@ -80,16 +80,27 @@ with tf.Session() as sess:
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
     # Decrease test_size if you don't have enough memory
     test_size = 256
-    total_accuracy=accuracy.eval({x: mnist.test.images[:test_size], y: mnist.test.labels[:test_size]})
-    print("Accuracy:", total_accuracy)
+    print("Accuracy:", accuracy.eval({x: mnist.test.images[:test_size], y: mnist.test.labels[:test_size]}))
 
-import matplotlib.pyplot as plt
-import numpy as np
-plt.xlabel('epoch')
-plt.ylabel('loss')
-my_x_ticks = np.arange(0,training_epochs,10)
-plt.xticks(my_x_ticks)
-plt.title('sigmoid:learning_rate = 0.001,training_epochs = 200,batch_size = 128')
-plt.plot(x_axis,loss_plot,'r')
-plt.annotate("accuracy=%s , Loss= %s" %(total_accuracy,loss_plot[-1]), xy=(training_epochs-1,loss_plot[-1]), xytext=(-40, 10), textcoords='offset points')
-plt.show()
+```
+learning rate=0.001，epoch=20测试结果
+
+![image](https://raw.githubusercontent.com/vvchenvv/Self_Driving_Tutorial/master/Class1/4-01_Deep_Neural_Network_in_TensorFlow/%E7%BB%93%E6%9E%9C1.png)
+
+learning rate=0.0001,epoch=20测试结果
+
+![image](https://raw.githubusercontent.com/vvchenvv/Self_Driving_Tutorial/master/Class1/4-01_Deep_Neural_Network_in_TensorFlow/%E7%BB%93%E6%9E%9C2.png)
+
+我们之前提到learning rate越大虽然学习越快，但精度可能并不好；上面这两个结果好像并不好解释，那是不是我们的学习回合不够多呢？那就把epoch加大到200看看有什么申请的反应
+
+![image](https://raw.githubusercontent.com/vvchenvv/Self_Driving_Tutorial/master/Class1/4-01_Deep_Neural_Network_in_TensorFlow/%E7%BB%93%E6%9E%9C3.png)
+
+![image](https://raw.githubusercontent.com/vvchenvv/Self_Driving_Tutorial/master/Class1/4-01_Deep_Neural_Network_in_TensorFlow/%E7%BB%93%E6%9E%9C4.png)
+
+哈，这就是神经网络的神奇，调整一个小参数也会有很大的差别。感兴趣的同学可以把激活函数变成我们之前提到的sigmoid，看看有什么变化
+
+# 完整代码请关注我的github：
+[Github链接](https://github.com/vvchenvv/Self_Driving_Tutorial/tree/master/Class1/4-01_Deep_Neural_Network_in_TensorFlow)
+
+# 更多文章请关注我的个人网站：
+[weiweizhao.com](http://weiweizhao.com/category/ai/)
